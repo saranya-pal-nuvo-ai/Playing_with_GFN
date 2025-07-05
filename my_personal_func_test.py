@@ -4,6 +4,8 @@ from mols.utils.chem import mol_from_frag  # assuming it's the function used
 from mols.utils.molMDP import BlockMoleculeData
 from mols.mol_mdp_ext import BlockMoleculeDataExtended
 
+from mols.utils.molMDP import BlockMoleculeData, MolMDP
+
 
 def test_functions():
     frag1 = Chem.MolFromSmiles("C[*]")  # C-R
@@ -25,9 +27,46 @@ def test_functions():
     print("SMILES:", moldata.smiles)
 
 
+
+def test_mdp():
+    """
+    We will try to build CH3-OH using 2 blocks: CH3 and OH
+    """
+    me_alc = BlockMoleculeData()   # Initially molecule is empty
+
+    # Add methyl
+    me_alc.add_block(
+            block_idx = 0,
+            block = Chem.MolFromSmiles("C"),
+            block_r = [0],
+            stem_idx = None,
+            atmidx = None
+        )
+
+    print(me_alc.stems)
+    
+    # Add hydroxide
+    me_alc.add_block(
+        block_idx=1,
+        block=Chem.MolFromSmiles("O"),
+        block_r=[0],
+        stem_idx=0,
+        atmidx=None
+    )
+
+
+    print('-'*10)
+    print(me_alc.slices)
+    print(me_alc.jbonds)
+    print(me_alc.stems)
+    
+
+
 def main():
     test_functions()
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+
+    test_mdp()
