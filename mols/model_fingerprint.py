@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-import utils.chem as chem
+import mols.utils.chem as chem
 
 fpe = [None]
 FP_CONFIG = {

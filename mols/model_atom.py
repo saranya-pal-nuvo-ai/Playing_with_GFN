@@ -25,8 +25,8 @@ from torch_geometric.nn import NNConv, Set2Set
 from torch_geometric.data import Data, Batch
 import torch_geometric.nn as gnn
 
-from utils import chem
-from utils.chem import atomic_numbers
+from mols.utils import chem
+from mols.utils.chem import atomic_numbers
 
 warnings.filterwarnings('ignore')
 

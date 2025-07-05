@@ -1,0 +1,28 @@
+[project]
+name = "gflownet"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mkl-fft>=2.0.0",
+    "mkl-random>=1.2.11",
+    "mkl-service>=2.5.2",
+    "numpy>=2.2.6",
+    "pandas>=2.3.0",
+    "ray>=2.47.1",
+    "rdkit>=2025.3.3",
+    "scipy>=1.16.0",
+    "torch>=2.7.1",
+    "torch-geometric>=2.6.1",
+    "tqdm>=4.67.1",
+    "torch-sparse",
+    "torch-scatter",
+    "torch-cluster",
+]
+
+[tool.uv.sources]
+torch-sparse = { url = "https://data.pyg.org/whl/torch-2.7.0%2Bcu126/torch_sparse-0.6.18%2Bpt27cu126-cp312-cp312-linux_x86_64.whl" }
+torch-scatter = { url = "https://data.pyg.org/whl/torch-2.7.0%2Bcu126/torch_scatter-2.1.2%2Bpt27cu126-cp312-cp312-linux_x86_64.whl" }
+torch-cluster = { url = "https://data.pyg.org/whl/torch-2.7.0%2Bcu126/torch_cluster-1.6.3%2Bpt27cu126-cp312-cp312-linux_x86_64.whl" }
+

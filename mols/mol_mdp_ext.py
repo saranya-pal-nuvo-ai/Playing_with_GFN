@@ -2,11 +2,11 @@ from collections import defaultdict
 import os.path
 import numpy as np
 
-from utils.molMDP import BlockMoleculeData, MolMDP
-import utils.chem as chem
+from mols.utils.molMDP import BlockMoleculeData, MolMDP
+import mols.utils.chem as chem
 from rdkit import Chem
 
-import model_atom, model_block, model_fingerprint
+import mols.model_atom, mols.model_block, mols.model_fingerprint
 
 
 class BlockMoleculeDataExtended(BlockMoleculeData):
