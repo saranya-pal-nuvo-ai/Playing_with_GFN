@@ -6,7 +6,9 @@ from mols.utils.molMDP import BlockMoleculeData, MolMDP
 import mols.utils.chem as chem
 from rdkit import Chem
 
-import mols.model_atom, mols.model_block, mols.model_fingerprint
+import mols.model_atom as model_atom
+import mols.model_block as model_block
+import mols.model_fingerprint as model_fingerprint
 
 
 class BlockMoleculeDataExtended(BlockMoleculeData):

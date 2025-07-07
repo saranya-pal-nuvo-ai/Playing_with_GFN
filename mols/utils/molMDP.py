@@ -7,6 +7,7 @@ import pandas as pd
 from rdkit import Chem
 from . import chem
 
+
 class BlockMoleculeData:
 
     def __init__(self):
@@ -50,6 +51,7 @@ class BlockMoleculeData:
             # destroy properties
             self._mol = None
         return None
+
 
     def delete_blocks(self, block_mask):
         """
@@ -148,8 +150,8 @@ class BlockMoleculeData:
 class MolMDP:
     def __init__(self, blocks_file):
         blocks = pd.read_json(blocks_file)
-        self.block_smi = blocks["block_smi"].to_list()
-        self.block_rs = blocks["block_r"].to_list()
+        self.block_smi = blocks["block_smi"].to_list()             #  Smiles stored as a list
+        self.block_rs = blocks["block_r"].to_list()                #  Atoms available for attachment for each smile/mol
         self.block_nrs = np.asarray([len(r) for r in self.block_rs])
         self.block_mols = [Chem.MolFromSmiles(smi) for smi in blocks["block_smi"]]
         self.block_natm = np.asarray([b.GetNumAtoms() for b in self.block_mols])

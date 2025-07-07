@@ -19,6 +19,8 @@ dependencies = [
     "torch-sparse",
     "torch-scatter",
     "torch-cluster",
+    "ipykernel>=6.29.5",
+    "matplotlib>=3.10.3",
 ]
 
 [tool.uv.sources]
