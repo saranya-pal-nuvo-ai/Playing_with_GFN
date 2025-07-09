@@ -147,6 +147,9 @@ class BlockMoleculeData:
         return Chem.MolToSmiles(self.mol)
 
 
+
+
+
 class MolMDP:
     def __init__(self, blocks_file):
         blocks = pd.read_json(blocks_file)
