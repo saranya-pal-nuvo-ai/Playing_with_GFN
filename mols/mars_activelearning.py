@@ -29,6 +29,7 @@ import torch.nn.functional as F
 from torch_geometric.data import Data, Batch
 import torch_geometric.nn as gnn
 from torch.distributions.categorical import Categorical
+from pyg_utils import node_ptr, edge_ptr
 
 
 from utils import chem
@@ -330,8 +331,8 @@ def train_generative_model(args, model, proxy, dataset, num_steps=None, do_save=
         for _ in tqdm(range(args.num_sgd_steps), leave=False):
             s, a = dataset.sample2batch(dataset.sample(mbsize))
             stem_out, mol_out, bond_out = model(s, None, do_bonds=True)
-            bs = torch.tensor(s.__slices__['bonds'])
-            ss = torch.tensor(s.__slices__['stems'])
+            bs = edge_ptr(s)
+            ss = node_ptr(s)
             loss = 0
             for j in range(mbsize):
                 sj = stem_out[ss[j]:ss[j+1]]

@@ -32,6 +32,7 @@ import concurrent.futures
 from mol_mdp_ext import MolMDPExtended, BlockMoleculeDataExtended
 from gflownet import Proxy, make_model
 import model_atom, model_block, model_fingerprint
+from pyg_utils import node_ptr, edge_ptr
 
 parser = argparse.ArgumentParser()
 
@@ -304,8 +305,8 @@ def main(args):
         for _ in tqdm(range(args.num_sgd_steps), leave=False):
             s, a = dataset.sample2batch(dataset.sample(mbsize))
             stem_out, mol_out, bond_out = model(s, None, do_bonds=True)
-            bs = torch.tensor(s.__slices__['bonds'])
-            ss = torch.tensor(s.__slices__['stems'])
+            bs = edge_ptr(s)
+            ss = node_ptr(s)
             loss = 0
             for j in range(mbsize):
                 sj = stem_out[ss[j]:ss[j+1]]

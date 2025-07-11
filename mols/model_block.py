@@ -8,6 +8,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch_geometric.data import Data, Batch
 import torch_geometric.nn as gnn
+from pyg_utils import node_ptr, edge_ptr
 
 class GraphAgent(nn.Module):
 
@@ -67,8 +68,8 @@ class GraphAgent(nn.Module):
         # adjust for the batch packing)
         if do_stems:
             stem_block_batch_idx = (
-                torch.tensor(graph_data.__slices__['x'], device=out.device)[graph_data.stems_batch]
-                + graph_data.stems[:, 0])
+                node_ptr(graph_data)[graph_data.stems_batch]
+                        + graph_data.stems[:, 0])
             if self.version == 'v1' or self.version == 'v4':
                 stem_out_cat = torch.cat([out[stem_block_batch_idx], graph_data.stemtypes], 1)
             elif self.version == 'v2' or self.version == 'v3':
@@ -102,7 +103,7 @@ class GraphAgent(nn.Module):
         return -self.index_output_by_action(s, stem_lsm, mol_lsm, a)
 
     def index_output_by_action(self, s, stem_o, mol_o, a):
-        stem_slices = torch.tensor(s.__slices__['stems'][:-1], dtype=torch.long, device=stem_o.device)
+        stem_slices = node_ptr(s)[:-1].to(stem_o.device)
         return (
             stem_o[stem_slices + a[:, 1]][
                 torch.arange(a.shape[0]), a[:, 0]] * (a[:, 0] >= 0)

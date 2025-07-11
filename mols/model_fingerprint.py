@@ -2,6 +2,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
+from pyg_utils import node_ptr, edge_ptr
 import utils.chem as chem
 
 fpe = [None]
